@@ -4,28 +4,28 @@ import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
 import org.openqa.selenium.By;
 
-@DefaultUrl("page:base.page")
+@DefaultUrl("page:saucedemo.page")
 public class SauceDemoLoginPage extends PageObject {
 
-    private By userNameInput;
-    private By passwordInput;
-    private By loginButton;
-    private By errorMessage;
+    private final By userNameInput = By.xpath("//input[@id='user-name']");
+    private final By passwordInput = By.xpath("//input[@id='password']");
+    private final By loginButton = By.xpath("//input[@id='login-button']");
+    private final By errorMessage = By.xpath("//h3[@data-test='error']");
 
-    public void typeUser(String user){
+    public void typeUser(String user) {
         getDriver().findElement(userNameInput).sendKeys(user);
     }
 
-    public void typePassword(String pass){
+    public void typePassword(String pass) {
         getDriver().findElement(passwordInput).sendKeys(pass);
     }
 
-    public void logIn(){
+    public void logIn() {
         getDriver().findElement(loginButton).click();
     }
 
-    public String getErrorMessage(){
-        return "<Mensaje de Error>";
+    public String getErrorMessage() {
+        return getDriver().findElement(errorMessage).getText();
     }
 
 }

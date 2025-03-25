@@ -23,10 +23,10 @@ public class SauceStepDefinitions {
         sauceUser.fillsFieldsAndLogin(user, pass);
     }
 
-    @Entonces("valida que el mensaje de error contiene")
+    @Entonces("valida que el mensaje de error contiene {string}")
     public void validaQueElMensajeDeErrorContiene(String error) {
         Assertions.assertTrue(sauceUser.errorMessage().contains(error),
-                "El mensaje de error no contiene >>> "+error+"");
+                "El mensaje de error no contiene >>> " + error);
     }
 
 }

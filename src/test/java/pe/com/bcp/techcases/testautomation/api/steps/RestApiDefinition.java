@@ -14,6 +14,7 @@ import pe.com.bcp.techcases.testautomation.api.actors.ApiClient;
 import java.util.List;
 import java.util.Map;
 
+import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RestApiDefinition {
@@ -47,8 +48,8 @@ public class RestApiDefinition {
     @Cuando("creo un nuevo usuario")
     public void creoUnNuevoUsuario(DataTable newUser) {
         List<Map<String, String>> rows = newUser.asMaps(String.class, String.class);
-        String name = rows.get(0).get(null);
-        String job = rows.get(0).get(null);
+        String name = rows.get(0).get("name");
+        String job = rows.get(0).get("job");
         apiClient.createNewUser(URL, name, job);
     }
 
@@ -60,7 +61,11 @@ public class RestApiDefinition {
     @Cuando("actualizo el usuario creado con los nuevos datos")
     public void actualizoElUsuarioCreadoConLosNuevosDatos(DataTable updateUser) {
         List<Map<String, String>> rows = updateUser.asMaps(String.class, String.class);
-        apiClient.updateUserInfo(URL, null, null);
+        String newName = rows.get(0).get("newName");
+        String newJob = rows.get(0).get("newJob");
+        theActorInTheSpotlight().remember("newName",newName);
+        theActorInTheSpotlight().remember("newJob",newJob);
+        apiClient.updateUserInfo(URL, newName, newJob);
     }
 
     @Entonces("que los nuevos datos esten actualizados")

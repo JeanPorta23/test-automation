@@ -13,12 +13,10 @@ import java.util.logging.Logger;
  */
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-        plugin = {},
+        plugin = {"json:target/cucumber/cucumber.json", "html:target/cucumber/fast-report/cucumber-pretty.html"},
         features = "src/test/resources/features/",
         stepNotifications = true,
-        glue = "pe.com.bcp.techcases.testautomation",
-        tags = "@web and @caso1"
-
+        glue = "pe.com.bcp.techcases.testautomation"
 )
 public class Tests {
 
